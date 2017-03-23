@@ -1,0 +1,82 @@
+{
+  "name": "Commando",
+  "productName": "Commando",
+  "version": "0.0.1",
+  "description": "Rage of Operator",
+  "main": "./app/main.js",
+  "scripts": {
+    "start": "DEBUG=true electron ./app",
+    "test": "npm run test:unit && npm run test:e2e",
+    "dev": "NODE_ENV=development npm run watch & npm start",
+    "watch": "npm run watch:renderer & npm run watch:main",
+    "watch:renderer": "webpack --watch --watch-poll --config ./webpack.renderer.config.js",
+    "watch:main": "webpack --watch --watch-poll --config ./webpack.main.config.js",
+    "build": "npm run build:renderer & npm run build:main",
+    "build:renderer": "webpack --progress --hide-modules --config ./webpack.renderer.config.js",
+    "build:main": "webpack --progress --hide-modules --config ./webpack.main.config.js",
+    "test:unit": "karma start test/unit/karma.conf.js",
+    "test:e2e": "npm run pack && mocha test/e2e",
+    "pack": "npm run build && build --dir ./"
+  },
+  "build": {
+    "appId": "net.nekobato.polidium",
+    "files": [
+      "!src"
+    ],
+    "asar": true,
+    "linux": {
+      "arch": [
+        "ia32",
+        "x64"
+      ],
+      "target": [
+        "deb",
+        "AppImage",
+        "rpm"
+      ]
+    },
+    "win": {
+      "icon": "./app/app.ico",
+      "target": [
+        "squirrel"
+      ]
+    },
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "./app/app.icns",
+      "target": "default"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nekobato/Commando.git"
+  },
+  "keywords": [],
+  "author": "nekobato",
+  "bugs": {
+    "url": "https://github.com/nekobato/Commando/issues"
+  },
+  "homepage": "https://github.com/nekobato/Commando",
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.2.2",
+    "css-loader": "^0.27.3",
+    "electron": "^1.4.10",
+    "electron-builder": "^16.2.0",
+    "file-loader": "^0.10.1",
+    "jade": "^1.11.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.2",
+    "materialize-css": "^0.98.0",
+    "node-loader": "^0.6.0",
+    "style-loader": "^0.16.0",
+    "url-loader": "^0.5.7",
+    "vue": "^2.1.4",
+    "vue-loader": "^11.1.4",
+    "vue-template-compiler": "^2.1.0",
+    "vuex": "^2.0.0",
+    "webpack": "^2.2.1",
+    "xss": "^0.3.3"
+  }
+}

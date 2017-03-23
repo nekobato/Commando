@@ -35,3 +35,9 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# Repository
+app/font
+app/img
+app/js
+app/main.js
